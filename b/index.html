@@ -135,6 +135,7 @@ main{margin-top:18px}
 .lotog .choice{position:relative}.tok{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:var(--mint);color:#fff;display:none;place-items:center;font-size:34px;box-shadow:0 6px 16px rgba(29,181,132,.4)}.won .tok{display:grid}.won img{opacity:.55}
 .gapc{display:inline-block;min-width:.7em;border-bottom:6px solid #CBD3E3;color:#CBD3E3;margin-right:2px}.gapc.ok{color:var(--orange);border-color:var(--mint)}
 @media (max-width:700px){.fish{width:72px;height:72px;font-size:46px}}
+.vcard.book .th .pl{background:rgba(255,153,0,.95)}
 </style>
 </head>
 <body>
@@ -173,7 +174,7 @@ puzzle:'<svg class="i" viewBox="0 0 24 24"><path d="M10 3h4v2.5a1.5 1.5 0 0 0 3 
 no:'<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>',
 };
 
-const CFG={"letter": "B", "first": "b", "words": ["bebe", "baleine", "bison", "biche", "belette", "bouc", "babouin", "bateau"], "label": {"bebe": "bébé", "baleine": "baleine", "bison": "bison", "biche": "biche", "belette": "belette", "bouc": "bouc", "babouin": "babouin", "bateau": "bateau", "avion": "avion", "ami": "ami", "abeille": "abeille", "ane": "âne", "alouette": "alouette", "agneau": "agneau", "alligator": "alligator", "canard": "canard", "castor": "castor", "coq": "coq", "coccinelle": "coccinelle", "cameleon": "caméléon", "crabe": "crabe", "dauphin": "dauphin", "dinde": "dinde", "dromadaire": "dromadaire", "dalmatien": "dalmatien", "dragon": "dragon", "dinosaure": "dinosaure"}, "syl": {"bebe": ["bé", "bé"], "baleine": ["ba", "leine"], "bison": ["bi", "son"], "biche": ["bi", "che"], "belette": ["be", "lette"], "bouc": ["bouc"], "babouin": ["ba", "bouin"], "bateau": ["ba", "teau"]}, "menu": ["baleine", "bison", "biche", "bateau", "babouin"], "videos": [{"title": "La leçon du son B", "img": "bison", "url": "https://youtu.be/yXcVsN7VT3I"}, {"title": "La sieste du bison", "img": "biche", "url": "https://youtu.be/08EW6c6xJlU"}], "other": ["avion", "ami", "abeille", "ane", "alouette", "agneau", "alligator", "canard", "castor", "coq", "coccinelle", "cameleon", "crabe", "dauphin", "dinde", "dromadaire", "dalmatien", "dragon", "dinosaure"], "games": ["rep", "find", "memo", "manque"]};
+const CFG={"letter": "B", "first": "b", "words": ["bebe", "baleine", "bison", "biche", "belette", "bouc", "babouin", "bateau"], "label": {"bebe": "bébé", "baleine": "baleine", "bison": "bison", "biche": "biche", "belette": "belette", "bouc": "bouc", "babouin": "babouin", "bateau": "bateau", "avion": "avion", "ami": "ami", "abeille": "abeille", "ane": "âne", "alouette": "alouette", "agneau": "agneau", "alligator": "alligator", "canard": "canard", "castor": "castor", "coq": "coq", "coccinelle": "coccinelle", "cameleon": "caméléon", "crabe": "crabe", "dauphin": "dauphin", "dinde": "dinde", "dromadaire": "dromadaire", "dalmatien": "dalmatien", "dragon": "dragon", "dinosaure": "dinosaure"}, "syl": {"bebe": ["bé", "bé"], "baleine": ["ba", "leine"], "bison": ["bi", "son"], "biche": ["bi", "che"], "belette": ["be", "lette"], "bouc": ["bouc"], "babouin": ["ba", "bouin"], "bateau": ["ba", "teau"]}, "menu": ["baleine", "bison", "biche", "bateau", "babouin"], "videos": [{"title": "La leçon du son B", "img": "bison", "url": "https://youtu.be/yXcVsN7VT3I"}, {"title": "La sieste du bison", "img": "biche", "url": "https://youtu.be/08EW6c6xJlU"}], "other": ["avion", "ami", "abeille", "ane", "alouette", "agneau", "alligator", "canard", "castor", "coq", "coccinelle", "cameleon", "crabe", "dauphin", "dinde", "dromadaire", "dalmatien", "dragon", "dinosaure"], "games": ["rep", "find", "memo", "manque"], "books": [{"title": "La sieste du bison", "img": "bison", "url": "https://www.amazon.fr/dp/B0HSKCJRTN"}]};
 const AW=CFG.words, OTHER=CFG.other, LABEL=CFG.label, L=CFG.letter;
 const $=id=>document.getElementById(id);
 setTimeout(()=>{$('staricon').innerHTML=I.star;$('home').innerHTML=I.home+' Les jeux';$('back2').innerHTML=I.home+' Toutes les lettres';},0);
@@ -200,8 +201,9 @@ const prog=(n,i)=>'<div class="prog">'+Array.from({length:n},(_,k)=>`<i class="$
 function reset(){gen++;try{player.pause();}catch(e){} document.querySelectorAll('video').forEach(v=>{try{v.pause();}catch(e){}});}
 
 // ---------- accueil / menu ----------
-function start(){ $('main').innerHTML=`<div class="start"><img src="img/lila.jpg" alt="Lila"><div><h1>Les jeux de Lila<br>le son <span class="a">${L}</span></h1><p>Écoute, répète, cherche et joue avec les amis de Lila.</p><button class="cta" id="go">${I.play} On joue !</button></div></div>`+vids();
+function start(){ $('main').innerHTML=`<div class="start"><img src="img/lila.jpg" alt="Lila"><div><h1>Les jeux de Lila<br>le son <span class="a">${L}</span></h1><p>Écoute, répète, cherche et joue avec les amis de Lila.</p><button class="cta" id="go">${I.play} On joue !</button></div></div>`+vids()+books();
   $('go').onclick=()=>menu(); }
+function books(){if(!(CFG.books||[]).length)return '';return `<div class="vids"><h2>Le livre de l'histoire</h2><div class="vgrid">${CFG.books.map(v=>`<a class="vcard book" href="${v.url}" target="_blank" rel="noopener"><div class="th"><img src="img/${v.img}_n.jpg" alt=""><span class="pl">${I.book}</span></div><div><b>${v.title}</b><span class="s">Le livre sur Amazon</span></div></a>`).join('')}</div></div>`;}
 function vids(){return `<div class="vids"><h2>Les vidéos de Lila</h2><div class="vgrid">${CFG.videos.map(v=>{const on=!!v.url;return `<${on?'a':'div'} class="vcard${on?'':' soon'}"${on?` href="${v.url}" target="_blank" rel="noopener"`:''}><div class="th"><img src="img/${v.img}_n.jpg" alt=""><span class="pl">${I.play}</span></div><div><b>${v.title}</b><span class="s">${on?'Regarder sur YouTube':'Bientôt'}</span></div></${on?'a':'div'}>`;}).join('')}</div></div>`;}
 function menu(){reset();$('home').style.display='none';$('back2').style.display='inline-flex';
   $('main').innerHTML=`<div class="menu">${CFG.games.map((g,k)=>{const [c,ic,t,s]=GAMES[g];return `<button class="mbtn" data-g="${g}"><div class="th"><img src="img/${CFG.menu[k%CFG.menu.length]}_n.jpg" alt=""><span class="ic" style="background:${c}">${I[ic]}</span></div><div><b>${t}</b><span class="s">${s}</span></div></button>`;}).join('')}</div>`;
@@ -336,6 +338,7 @@ function join(){reset();const list=shuffle(AW.filter(w=>SYL[w]&&SYL[w].length>1)
 // ---------- jeux ajoutés le 24/11 ----------
 const LETTERS=['A','B','C','D'];
 Object.assign(I,{
+book:'<svg class="i" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg>',
 grid:'<svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
 fish:'<svg class="i" viewBox="0 0 24 24"><path d="M2 12s4-6 11-6c4 0 7 3 9 6-2 3-5 6-9 6-7 0-11-6-11-6z"/><path d="M2 12 0 8m2 4-2 4"/><circle cx="16" cy="11" r="1"/></svg>',
 gap:'<svg class="i" viewBox="0 0 24 24"><path d="M4 20h5"/><path d="M12 6h8M12 12h8M12 18h8"/><path d="M6.5 4v10"/></svg>',
