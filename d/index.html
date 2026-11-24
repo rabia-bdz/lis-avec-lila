@@ -166,7 +166,7 @@ puzzle:'<svg class="i" viewBox="0 0 24 24"><path d="M10 3h4v2.5a1.5 1.5 0 0 0 3 
 no:'<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>',
 };
 
-const CFG={"letter": "D", "first": "d", "words": ["dauphin", "dinde", "dromadaire", "dalmatien", "dragon", "dinosaure"], "label": {"dauphin": "dauphin", "dinde": "dinde", "dromadaire": "dromadaire", "dalmatien": "dalmatien", "dragon": "dragon", "dinosaure": "dinosaure", "chat": "chat", "lune": "lune", "soleil": "soleil", "pomme": "pomme"}, "syl": {"dauphin": ["dau", "phin"], "dinde": ["din", "de"], "dromadaire": ["dro", "ma", "daire"], "dalmatien": ["dal", "ma", "tien"], "dragon": ["dra", "gon"], "dinosaure": ["di", "no", "saure"]}, "menu": ["dauphin", "dinde", "dalmatien", "dromadaire", "dinosaure"], "videos": [{"title": "La leçon du son D", "img": "dinosaure", "url": "https://youtu.be/3SzbVNx5Bj0"}, {"title": "Le Dromadaire et le Dalmatien", "img": "dromadaire", "url": ""}], "other": ["chat", "lune", "soleil", "pomme"]};
+const CFG={"letter": "D", "first": "d", "words": ["dauphin", "dinde", "dromadaire", "dalmatien", "dragon", "dinosaure"], "label": {"dauphin": "dauphin", "dinde": "dinde", "dromadaire": "dromadaire", "dalmatien": "dalmatien", "dragon": "dragon", "dinosaure": "dinosaure", "avion": "avion", "ami": "ami", "abeille": "abeille", "ane": "âne", "alouette": "alouette", "agneau": "agneau", "alligator": "alligator", "bebe": "bébé", "baleine": "baleine", "bison": "bison", "biche": "biche", "belette": "belette", "bouc": "bouc", "babouin": "babouin", "bateau": "bateau", "canard": "canard", "castor": "castor", "coq": "coq", "coccinelle": "coccinelle", "cameleon": "caméléon", "crabe": "crabe"}, "syl": {"dauphin": ["dau", "phin"], "dinde": ["din", "de"], "dromadaire": ["dro", "ma", "daire"], "dalmatien": ["dal", "ma", "tien"], "dragon": ["dra", "gon"], "dinosaure": ["di", "no", "saure"]}, "menu": ["dauphin", "dinde", "dalmatien", "dromadaire", "dinosaure"], "videos": [{"title": "La leçon du son D", "img": "dinosaure", "url": "https://youtu.be/3SzbVNx5Bj0"}, {"title": "Le Dromadaire et le Dalmatien", "img": "dromadaire", "url": ""}], "other": ["avion", "ami", "abeille", "ane", "alouette", "agneau", "alligator", "bebe", "baleine", "bison", "biche", "belette", "bouc", "babouin", "bateau", "canard", "castor", "coq", "coccinelle", "cameleon", "crabe"]};
 const AW=CFG.words, OTHER=CFG.other, LABEL=CFG.label, L=CFG.letter;
 const $=id=>document.getElementById(id);
 setTimeout(()=>{$('staricon').innerHTML=I.star;$('home').innerHTML=I.home+' Les jeux';$('back2').innerHTML=I.home+' Toutes les lettres';},0);
@@ -284,7 +284,7 @@ function memo(){reset();
 }
 
 // ---------- 4. La boîte à (lettre) ----------
-function box(){reset();const list=shuffle([...shuffle(AW).slice(0,4),...OTHER]);let i=0;
+function box(){reset();const list=shuffle([...shuffle(AW).slice(0,4),...shuffle(OTHER).slice(0,4)]);let i=0;
   function show(){reset();if(i>=list.length)return finish(box);
     const w=list[i];const isA=AW.includes(w);
     $('main').innerHTML=`<div class="panel"><div class="box">

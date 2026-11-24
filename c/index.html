@@ -166,7 +166,7 @@ puzzle:'<svg class="i" viewBox="0 0 24 24"><path d="M10 3h4v2.5a1.5 1.5 0 0 0 3 
 no:'<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>',
 };
 
-const CFG={"letter": "C", "first": "c", "words": ["canard", "castor", "coq", "coccinelle", "cameleon", "crabe"], "label": {"canard": "canard", "castor": "castor", "coq": "coq", "coccinelle": "coccinelle", "cameleon": "caméléon", "crabe": "crabe", "chat": "chat", "lune": "lune", "soleil": "soleil", "pomme": "pomme"}, "syl": {"canard": ["ca", "nard"], "castor": ["cas", "tor"], "coq": ["coq"], "coccinelle": ["coc", "ci", "nelle"], "cameleon": ["ca", "mé", "lé", "on"], "crabe": ["cra", "be"]}, "menu": ["castor", "canard", "coccinelle", "crabe", "cameleon"], "videos": [{"title": "La leçon du son C", "img": "cameleon", "url": "https://youtu.be/X4wEeEoJF8I"}, {"title": "L'histoire du son C", "img": "coccinelle", "url": "https://youtu.be/H_1FHnFwPrs"}], "other": ["chat", "lune", "soleil", "pomme"]};
+const CFG={"letter": "C", "first": "c", "words": ["canard", "castor", "coq", "coccinelle", "cameleon", "crabe"], "label": {"canard": "canard", "castor": "castor", "coq": "coq", "coccinelle": "coccinelle", "cameleon": "caméléon", "crabe": "crabe", "avion": "avion", "ami": "ami", "abeille": "abeille", "ane": "âne", "alouette": "alouette", "agneau": "agneau", "alligator": "alligator", "bebe": "bébé", "baleine": "baleine", "bison": "bison", "biche": "biche", "belette": "belette", "bouc": "bouc", "babouin": "babouin", "bateau": "bateau", "dauphin": "dauphin", "dinde": "dinde", "dromadaire": "dromadaire", "dalmatien": "dalmatien", "dragon": "dragon", "dinosaure": "dinosaure"}, "syl": {"canard": ["ca", "nard"], "castor": ["cas", "tor"], "coq": ["coq"], "coccinelle": ["coc", "ci", "nelle"], "cameleon": ["ca", "mé", "lé", "on"], "crabe": ["cra", "be"]}, "menu": ["castor", "canard", "coccinelle", "crabe", "cameleon"], "videos": [{"title": "La leçon du son C", "img": "cameleon", "url": "https://youtu.be/X4wEeEoJF8I"}, {"title": "L'histoire du son C", "img": "coccinelle", "url": "https://youtu.be/H_1FHnFwPrs"}], "other": ["avion", "ami", "abeille", "ane", "alouette", "agneau", "alligator", "bebe", "baleine", "bison", "biche", "belette", "bouc", "babouin", "bateau", "dauphin", "dinde", "dromadaire", "dalmatien", "dragon", "dinosaure"]};
 const AW=CFG.words, OTHER=CFG.other, LABEL=CFG.label, L=CFG.letter;
 const $=id=>document.getElementById(id);
 setTimeout(()=>{$('staricon').innerHTML=I.star;$('home').innerHTML=I.home+' Les jeux';$('back2').innerHTML=I.home+' Toutes les lettres';},0);
@@ -284,7 +284,7 @@ function memo(){reset();
 }
 
 // ---------- 4. La boîte à (lettre) ----------
-function box(){reset();const list=shuffle([...shuffle(AW).slice(0,4),...OTHER]);let i=0;
+function box(){reset();const list=shuffle([...shuffle(AW).slice(0,4),...shuffle(OTHER).slice(0,4)]);let i=0;
   function show(){reset();if(i>=list.length)return finish(box);
     const w=list[i];const isA=AW.includes(w);
     $('main').innerHTML=`<div class="panel"><div class="box">
