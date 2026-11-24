@@ -193,7 +193,7 @@ const prog=(n,i)=>'<div class="prog">'+Array.from({length:n},(_,k)=>`<i class="$
 function reset(){gen++;try{player.pause();}catch(e){} document.querySelectorAll('video').forEach(v=>{try{v.pause();}catch(e){}});}
 
 // ---------- accueil / menu ----------
-function start(){ $('main').innerHTML=`<div class="start"><img src="img/lila.jpg" alt="Lila"><div><h1>Les jeux de Lila<br>le son <span class="a">${L}</span></h1><p>Écoute, répète, cherche et joue avec les amis de Lila.</p><button class="cta" id="go">${I.play} On joue !</button></div></div>`;
+function start(){ $('main').innerHTML=`<div class="start"><img src="img/lila.jpg" alt="Lila"><div><h1>Les jeux de Lila<br>le son <span class="a">${L}</span></h1><p>Écoute, répète, cherche et joue avec les amis de Lila.</p><button class="cta" id="go">${I.play} On joue !</button></div></div>`+vids();
   $('go').onclick=()=>menu(); }
 function vids(){return `<div class="vids"><h2>Les vidéos de Lila</h2><div class="vgrid">${CFG.videos.map(v=>{const on=!!v.url;return `<${on?'a':'div'} class="vcard${on?'':' soon'}"${on?` href="${v.url}" target="_blank" rel="noopener"`:''}><div class="th"><img src="img/${v.img}_n.jpg" alt=""><span class="pl">${I.play}</span></div><div><b>${v.title}</b><span class="s">${on?'Regarder sur YouTube':'Bientôt'}</span></div></${on?'a':'div'}>`;}).join('')}</div></div>`;}
 function menu(){reset();$('home').style.display='none';$('back2').style.display='inline-flex';
@@ -203,7 +203,7 @@ function menu(){reset();$('home').style.display='none';$('back2').style.display=
       ['memo',CFG.menu[2],'#B98BFF',I.cards,'Les paires','8 cartes cachées'],
       ['box',CFG.menu[3],'#FF7A2F',I.box,'La boîte à '+L,'Ça commence par '+L+' ?'],
       ['join',CFG.menu[4],'#FFB020',I.puzzle,'Le mot en morceaux','Remets les syllabes dans l\'ordre']].map(([g,im,c,ic,t,s])=>
-     `<button class="mbtn" data-g="${g}"><div class="th"><img src="img/${im}_n.jpg" alt=""><span class="ic" style="background:${c}">${ic}</span></div><div><b>${t}</b><span class="s">${s}</span></div></button>`).join('')}</div>`+vids();
+     `<button class="mbtn" data-g="${g}"><div class="th"><img src="img/${im}_n.jpg" alt=""><span class="ic" style="background:${c}">${ic}</span></div><div><b>${t}</b><span class="s">${s}</span></div></button>`).join('')}</div>`;
   document.querySelectorAll('.mbtn').forEach(b=>b.onclick=()=>{$('home').style.display='inline-flex';$('back2').style.display='none';({rep,find,memo,box,join})[b.dataset.g]();});
   lila('Choisis un jeu !');seq([P('choisis')]);
 }
@@ -306,7 +306,7 @@ function box(){reset();const list=shuffle([...shuffle(AW).slice(0,4),...OTHER]);
 
 // ---------- 5. Le mot en morceaux ----------
 const SYL=CFG.syl;
-function join(){reset();const list=shuffle(AW);let i=0;
+function join(){reset();const list=shuffle(AW.filter(w=>SYL[w]&&SYL[w].length>1));let i=0;
   function show(){reset();if(i>=list.length)return finish(join);
     const w=list[i];const syl=SYL[w];
     let tiles=syl.map((t,k)=>({t,k}));
@@ -324,7 +324,7 @@ function join(){reset();const list=shuffle(AW);let i=0;
     $('next').onclick=()=>{i++;show();};
     let pos=0;
     document.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{if(pos>=syl.length||b.disabled)return;const x=tiles[+b.dataset.n];
-      if(x.k===pos){b.disabled=true;b.classList.add('used');const sl=$('sl'+pos);sl.innerHTML=(pos===0?firstHTML(x.t):x.t);sl.classList.add('fill');pos++;ding();
+      if(x.t===syl[pos]){b.disabled=true;b.classList.add('used');const sl=$('sl'+pos);sl.innerHTML=(pos===0?firstHTML(x.t):x.t);sl.classList.add('fill');pos++;ding();
         if(pos===syl.length){star();lila('Bravo ! '+LABEL[w]+' !','happy');reset();document.querySelector('.slots').classList.add('done');
           const nx=$('next');nx.className='btn b-primary';nx.innerHTML=I.next+' Suivant';seq([W(w),300,P('bravo')]);}}
       else{b.classList.remove('bad');void b.offsetWidth;b.classList.add('bad');ding(false);lila('Presque ! Quel morceau vient '+(pos===0?'en premier':'après')+' ?','sad');}});
