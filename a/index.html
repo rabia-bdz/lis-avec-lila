@@ -199,7 +199,7 @@ puzzle:'<svg class="i" viewBox="0 0 24 24"><path d="M10 3h4v2.5a1.5 1.5 0 0 0 3 
 no:'<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>',
 };
 
-const CFG={"letter": "A", "first": "[aâ]", "words": ["avion", "ami", "abeille", "ane", "alouette", "agneau", "alligator"], "label": {"avion": "avion", "ami": "ami", "abeille": "abeille", "ane": "âne", "alouette": "alouette", "agneau": "agneau", "alligator": "alligator", "bebe": "bébé", "baleine": "baleine", "bison": "bison", "biche": "biche", "belette": "belette", "bouc": "bouc", "babouin": "babouin", "bateau": "bateau", "canard": "canard", "castor": "castor", "coq": "coq", "coccinelle": "coccinelle", "cameleon": "caméléon", "crabe": "crabe", "dauphin": "dauphin", "dinde": "dinde", "dromadaire": "dromadaire", "dalmatien": "dalmatien", "dragon": "dragon de Komodo", "dinosaure": "dinosaure"}, "syl": {"avion": ["a", "vion"], "ami": ["a", "mi"], "abeille": ["a", "beille"], "ane": ["â", "ne"], "alouette": ["a", "lou", "ette"], "agneau": ["a", "gneau"], "alligator": ["al", "li", "ga", "tor"]}, "menu": ["abeille", "avion", "ane", "agneau", "alligator"], "videos": [{"title": "La leçon du son A", "img": "avion", "url": "https://youtu.be/XCSGEJjVP0c"}, {"title": "L'histoire du son A", "img": "alouette", "url": "https://youtu.be/Gn--y2RcsYg"}], "other": ["bebe", "baleine", "bison", "biche", "belette", "bouc", "babouin", "bateau", "canard", "castor", "coq", "coccinelle", "cameleon", "crabe", "dauphin", "dinde", "dromadaire", "dalmatien", "dragon", "dinosaure"], "games": ["rep", "loto", "peche", "join"], "books": [{"title": "Le son A", "img": "abeille", "url": "https://www.amazon.fr/dp/B0HS4ZLW16"}], "col": ["#FFA05C", "#FF7A2F", "#D9561A"]};
+const CFG={"letter": "A", "first": "[aâ]", "words": ["avion", "ami", "abeille", "ane", "alouette", "agneau", "alligator"], "label": {"avion": "avion", "ami": "ami", "abeille": "abeille", "ane": "âne", "alouette": "alouette", "agneau": "agneau", "alligator": "alligator", "bebe": "bébé", "baleine": "baleine", "bison": "bison", "biche": "biche", "belette": "belette", "bouc": "bouc", "babouin": "babouin", "bateau": "bateau", "canard": "canard", "castor": "castor", "coq": "coq", "coccinelle": "coccinelle", "cameleon": "caméléon", "crabe": "crabe", "dauphin": "dauphin", "dinde": "dinde", "dromadaire": "dromadaire", "dalmatien": "dalmatien", "dragon": "dragon de Komodo", "dinosaure": "dinosaure", "ecureuil": "écureuil", "elan": "élan", "elephant": "éléphant", "escargot": "escargot"}, "syl": {"avion": ["a", "vion"], "ami": ["a", "mi"], "abeille": ["a", "beille"], "ane": ["â", "ne"], "alouette": ["a", "lou", "ette"], "agneau": ["a", "gneau"], "alligator": ["al", "li", "ga", "tor"]}, "menu": ["abeille", "avion", "ane", "agneau", "alligator"], "videos": [{"title": "La leçon du son A", "img": "avion", "url": "https://youtu.be/XCSGEJjVP0c"}, {"title": "L'histoire du son A", "img": "alouette", "url": "https://youtu.be/Gn--y2RcsYg"}], "other": ["bebe", "baleine", "bison", "biche", "belette", "bouc", "babouin", "bateau", "canard", "castor", "coq", "coccinelle", "cameleon", "crabe", "dauphin", "dinde", "dromadaire", "dalmatien", "dragon", "dinosaure", "ecureuil", "elan", "elephant", "escargot"], "games": ["rep", "loto", "peche", "join"], "books": [{"title": "Le son A", "img": "abeille", "url": "https://www.amazon.fr/dp/B0HS4ZLW16"}], "col": ["#FFA05C", "#FF7A2F", "#D9561A"]};
 const AW=CFG.words, OTHER=CFG.other, LABEL=CFG.label, L=CFG.letter;
 const $=id=>document.getElementById(id);
 setTimeout(()=>{$('staricon').innerHTML=I.star;$('home').innerHTML='<span class="mini4"><i style="background:#1DB584"></i><i style="background:#4F8DF7"></i><i style="background:#E84D8A"></i><i style="background:#FFB020"></i></span><span class="lbl">Jeux</span>';$('home').setAttribute('aria-label','Retour aux jeux');$('back2').innerHTML='<span class="hico">'+I.home+'</span><span class="az"><i style="background:#FF7A2F">A</i><em>→</em><i style="background:#1DB584">Z</i></span>';$('back2').setAttribute('aria-label','Toutes les lettres');},0);
@@ -317,21 +317,21 @@ function memo(){reset();
 }
 
 // ---------- 4. La boîte à (lettre) ----------
-function box(){reset();const list=shuffle([...shuffle(AW).slice(0,4),...shuffle(OTHER).slice(0,4)]);let i=0;
+function box(){const S=CFG.sound||L;reset();const list=shuffle([...shuffle(AW).slice(0,4),...shuffle(OTHER).slice(0,4)]);let i=0;
   function show(){reset();if(i>=list.length)return finish(box);
     const w=list[i];const isA=AW.includes(w);
     $('main').innerHTML=`<div class="panel"><div class="box">
       <div class="item"><img src="img/${w}_n.jpg" alt="">${level===2?`<div class="word" style="font-size:clamp(44px,8vw,72px)">${LABEL[w]}</div>`:''}</div></div>
       <div class="row"><button class="btn b-sky" id="again">${I.sound} Écouter</button></div>
-      <div class="yn"><button class="y" id="yes">${I.box} Oui, ${L} !</button><button class="n" id="no">${I.no} Pas de ${L}</button></div>
+      <div class="yn"><button class="y" id="yes">${I.box} Oui, ${S} !</button><button class="n" id="no">${I.no} Pas de ${S}</button></div>
       ${prog(list.length,i)}</div>`;
-    lila('Est-ce que ça commence par '+L+' ?');
+    lila('Est-ce que ça commence par '+S+' ?');
     seq(level===1?[W(w),300,P('commence')]:[P('commence')]);
     $('again').onclick=()=>seq([W(w)]);
     let lock=false;
     const answer=yes=>{if(lock)return;reset();
-      if(yes===isA){lock=true;ding();star();lila(isA?'Oui ! Ça commence par '+L+'. Dans la boîte !':'Bien vu ! Ça ne commence pas par '+L+'.','happy');seq([P(isA?'oui':'bienvu'),300,()=>{i++;show();}]);}
-      else{ding(false);lila('Écoute bien. Est-ce que tu entends '+L+' au début ?','sad');seq([P('ecoute'),300,W(w)]);}};
+      if(yes===isA){lock=true;ding();star();lila(isA?'Oui ! Ça commence par '+S+'. Dans la boîte !':'Bien vu ! Ça ne commence pas par '+S+'.','happy');seq([P(isA?'oui':'bienvu'),300,()=>{i++;show();}]);}
+      else{ding(false);lila('Écoute bien. Est-ce que tu entends '+S+' au début ?','sad');seq([P('ecoute'),300,W(w)]);}};
     $('yes').onclick=()=>answer(true);$('no').onclick=()=>answer(false);
   }
   show();
@@ -366,7 +366,7 @@ function join(){reset();const list=shuffle(AW.filter(w=>SYL[w]&&SYL[w].length>1)
 }
 
 // ---------- jeux ajoutés le 24/11 ----------
-const LETTERS=['A','B','C','D'];
+const LETTERS=['A','B','C','D','E'];
 Object.assign(I,{
 book:'<svg class="i" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg>',
 grid:'<svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
@@ -377,14 +377,14 @@ const GAMES={
  rep:['#1DB584','sound','Écoute et répète','Les amis de Lila se présentent'],
  find:['#4F8DF7','target',"Trouve l'image",'Touche la bonne image'],
  memo:['#B98BFF','cards','Les paires','8 cartes cachées'],
- box:['#FF7A2F','box','La boîte à '+L,'Ça commence par '+L+' ?'],
+ box:['#FF7A2F','box','La boîte à '+(CFG.sound||L),'Ça commence par '+(CFG.sound||L)+' ?'],
  join:['#FFB020','puzzle','Le mot en morceaux',"Remets les syllabes dans l'ordre"],
  loto:['#E84D8A','grid','Le loto de Lila','Remplis ta carte'],
  peche:['#2FA8D8','fish','La pêche aux lettres','Attrape tous les '+L],
  manque:['#7A5CFA','gap','La lettre qui manque','Quelle lettre au début ?'],};
 
 // ---------- Le loto de Lila ----------
-function loto(){reset();const n=level===1?4:6;const card=shuffle(AW).slice(0,n);const calls=shuffle(card);let i=0;
+function loto(){reset();const n=Math.min(level===1?4:6,AW.length);const card=shuffle(AW).slice(0,n);const calls=shuffle(card);let i=0;
   $('main').innerHTML=`<div class="panel">
     <div id="call"></div>
     <div class="row" style="margin-top:4px"><button class="btn b-sky" id="again">${I.sound} ${level===2?'Aide : écouter':'Réécouter'}</button></div>
