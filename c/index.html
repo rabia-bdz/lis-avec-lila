@@ -408,7 +408,7 @@ function peche(){reset();const g0=gen;const goal=6;let got=0;
     const dir=Math.random()<.5?1:-1;const f={el,ch,dir,x:dir>0?-100:W+10,y:20+Math.random()*(H-130),ph:Math.random()*6,v:speed*(0.8+Math.random()*.5)};
     el.onclick=()=>{if(el.classList.contains('caught'))return;
       if(ch===L){el.classList.add('caught');ding();star();got++;document.querySelectorAll('#pp i')[got-1].classList.add('ok');lila('Bravo ! C\'est un '+L+' !','happy');
-        if(got>=goal){setTimeout(()=>{if(g0===gen)finish(peche);},700);}else{seq([P('bravo')]);}}
+        play(`snd/l_${L.toLowerCase()}.mp3`);if(got>=goal){setTimeout(()=>{if(g0===gen)finish(peche);},1000);}}
       else{el.classList.remove('nope');void el.offsetWidth;el.classList.add('nope');ding(false);lila('Ça, c\'est un '+ch+'. Cherche le '+L+' !','sad');}};
     pond.appendChild(el);fish.push(f);}
   function tick(t){if(g0!==gen||!document.body.contains(pond))return;const dt=last?Math.min(.05,(t-last)/1000):0;last=t;spawnT-=dt;
