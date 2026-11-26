@@ -28,7 +28,7 @@ const bad=()=>{play(D.presque);lila.className='lila sad'};
 /* --------- accueil de l'histoire --------- */
 function home(){
  cur=null;
- say(`On joue avec l'histoire « ${D.title} » ?`,P('q_accueil'));
+ say(`Coucou ! On joue avec l'histoire ?`,P('q_accueil'));
  main.innerHTML=`<section class="hst"><img src="img/couv.jpg" alt="">
   <div><small>Le son ${D.letter}</small><h1>${D.title}</h1>
   <p>Écoute l'histoire, puis joue avec Lila !</p>
@@ -60,7 +60,7 @@ function lvlItems(a){return a.filter(x=>!x.l||x.l===level)}
 /* --------- 1. remettre dans l'ordre --------- */
 function ordre(first){
  const N=level===1?3:5;
- if(first){cur.n=3;cur.i=0;say(level===1?"Touche les 3 images dans l'ordre de l'histoire.":"Touche les 5 images dans l'ordre de l'histoire.",P('q_ordre'))}
+ if(first){cur.n=3;cur.i=0;say("Touche les images dans l'ordre de l'histoire.",P('q_ordre'))}
  // choisir N scènes bien réparties
  const o=D.order;let ids;
  do{ids=pick(o,N).sort((a,b)=>a-b)}while(N===3&&ids[2]-ids[0]<3);
@@ -90,7 +90,7 @@ function qui(first){
 }
 /* --------- 3. vrai ou faux --------- */
 function vf(first){
- if(first){cur.list=pick(D.vf,ROUNDS);cur.n=cur.list.length;say(level===1?'Regarde l\'image et écoute. C\'est vrai ou faux ?':'Écoute bien. C\'est vrai ou faux ?',P('q_vf'))}
+ if(first){cur.list=pick(D.vf,ROUNDS);cur.n=cur.list.length;say('Écoute bien. C\'est vrai ou faux ?',P('q_vf'))}
  const it=cur.list[cur.i];
  frame(`<div class="sent">${it.t}</div><button class="say" id="say">🔊 Écouter</button>
   ${level===1?`<img class="scene sm" src="${sc(it.s)}" alt="">`:''}
@@ -108,7 +108,7 @@ function emo(first){
  const others=shuf(Object.keys(EMO).filter(e=>e!==it.e&&!(it.not||[]).includes(e))).slice(0,level===1?1:3);
  frame(`<div class="sent">${it.q}</div><img class="scene sm" src="${sc(it.s)}" alt="">
   <div class="opts">${shuf([it.e,...others]).map(e=>`<button class="opt" data-e="${e}"><span class="em">${EMO[e][0]}</span><b>${EMO[e][1]}</b></button>`).join('')}</div>`);
- play(S(it.id));
+
  main.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
   if(b.dataset.e===it.e){b.classList.add('good');good();say(it.a,null,'happy');advance(2000)}
   else{b.classList.remove('bad');void b.offsetWidth;b.classList.add('bad');bad();say('Regarde ses yeux et sa bouche.')}
@@ -119,7 +119,7 @@ function trouve(first){
  if(first){cur.list=shuf(lvlItems(D.trouve)).slice(0,ROUNDS);cur.n=cur.list.length;say('Cherche bien dans l\'image et touche !',P('q_trouve'))}
  const it=cur.list[cur.i];
  frame(`<div class="sent">Trouve ${it.t} !</div><div class="find" id="find"><img src="${sc(it.s)}" alt=""></div>`);
- play(S(it.id));
+
  let done=false;
  $('#find').onclick=e=>{
   if(done)return;const r=e.currentTarget.getBoundingClientRect();const x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
@@ -130,7 +130,7 @@ function trouve(first){
 }
 /* --------- 6. le mot qui manque --------- */
 function manque(first){
- if(first){cur.list=pick(D.manque,ROUNDS);cur.n=cur.list.length;say(level===1?'Quel mot manque ? Regarde l\'image.':'Lis la phrase. Quel mot manque ?',P('q_manque'))}
+ if(first){cur.list=pick(D.manque,ROUNDS);cur.n=cur.list.length;say('Lis la phrase. Quel mot manque ?',P('q_manque'))}
  const it=cur.list[cur.i];
  const words=shuf([it.ok,...(level===1?it.f.slice(0,1):it.f.slice(0,2))]);
  const card=w=>{
