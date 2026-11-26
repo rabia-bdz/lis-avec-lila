@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les jeux de Lila – La sieste du bison</title>
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="stylesheet" href="../jeux.css">
+<style>:root{--c1:#7DB2FF;--c2:#4F8DF7;--c3:#2F6BD4;--glow:#CFE0FF}</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="lila" id="lila" src="../../b/img/lila_face.jpg" alt="Lila">
+    <div class="bubble" id="bubble"></div>
+    <div class="right">
+      <div class="stars">⭐ <span id="score">0</span></div>
+      <div class="lvl"><button id="l1" class="on"><i style="background:#1DB584"></i>Facile</button><button id="l2"><i style="background:#FF7A2F"></i>Défi</button></div>
+    </div>
+  </header>
+  <nav class="nav"><a class="back2" href="../../index.html"><span class="hico">🏠</span>Accueil</a><a class="back2" href="#" id="games"><span class="hico b">📖</span>Les jeux de l'histoire</a></nav>
+  <main id="main"></main>
+</div>
+<div class="party" id="party"></div>
+<script>window.STORY={"bravo": "../../b/snd/p_bravo.mp3", "presque": "../../b/snd/p_presque.mp3", "fini": "../../b/snd/p_fini.mp3", "lilaBravo": "../../b/img/lila_bravo.jpg", "letter": "B", "title": "La sieste du bison", "video": "https://youtu.be/08EW6c6xJlU", "col": ["#7DB2FF", "#4F8DF7", "#2F6BD4"], "chars": ["bison", "biche", "belette"], "names": {"bison": ["bison", "le bison", "../../b/snd/bison.mp3"], "biche": ["biche", "la biche", "../../b/snd/biche.mp3"], "belette": ["belette", "la belette", "../../b/snd/belette.mp3"]}, "scene": {"1": "Le bison est fatigué.", "2": "Il se couche sous l'arbre.", "3": "Boum ! Une noisette ! Le bison regarde. Il ne voit rien. Il se rendort.", "4": "Un bruit le réveille. C'est son amie, la biche, qui vient vers lui.", "5": "Voici la biche !", "6": "La biche fait la sieste avec le bison.", "7": "Boum ! Boum ! Une noisette pour chacun !", "8": "C'est la belette ! Coquine ! Elle est cachée dans l'arbre.", "9": "Tout le monde rit.", "10": "« Belette, viens faire la sieste ! » La belette descend de l'arbre.", "11": "Bonne sieste, les amis !"}, "order": [1, 2, 3, 4, 6, 8, 10, 11], "thumbs": {"qui": 8, "vf": 5, "emo": 9, "trouve": 10, "manque": 3}, "qui": [{"id": "q1", "t": "Il est fatigué.", "who": "bison"}, {"id": "q2", "t": "Elle est cachée dans l'arbre.", "who": "belette"}, {"id": "q3", "t": "Elle vient vers le bison.", "who": "biche"}, {"id": "q4", "t": "Il se couche sous l'arbre.", "who": "bison"}, {"id": "q5", "t": "Elle descend de l'arbre.", "who": "belette"}, {"id": "q6", "t": "Elle fait la sieste avec le bison.", "who": "biche", "not": ["belette"]}, {"id": "q7", "t": "Elle fait tomber les noisettes.", "who": "belette"}, {"id": "q8", "t": "Il se rendort.", "who": "bison"}], "vf": [{"id": "v1", "t": "Le bison est fatigué.", "v": true, "s": 1}, {"id": "v2", "t": "Le bison fait la sieste sous l'arbre.", "v": true, "s": 2}, {"id": "v3", "t": "Une pomme tombe.", "v": false, "s": 3, "fix": "C'est une noisette !"}, {"id": "v4", "t": "La biche est l'amie du bison.", "v": true, "s": 5}, {"id": "v5", "t": "La biche est cachée dans l'arbre.", "v": false, "s": 8, "fix": "C'est la belette !"}, {"id": "v6", "t": "Le bison est fâché.", "v": false, "s": 9, "fix": "Tout le monde rit !"}, {"id": "v7", "t": "La belette descend de l'arbre.", "v": true, "s": 10}, {"id": "v8", "t": "Les trois amis font la sieste.", "v": true, "s": 11}], "emo": [{"id": "e1", "s": 1, "q": "Comment se sent le bison ?", "e": "fatigue", "a": "Oui, le bison est fatigué."}, {"id": "e2", "s": 9, "q": "Comment se sentent les amis ?", "e": "rit", "a": "Oui, tout le monde rit !", "not": ["content"]}, {"id": "e3", "s": 3, "q": "Boum ! Comment se sent le bison ?", "e": "surpris", "a": "Oui, le bison est surpris !", "not": ["peur"]}, {"id": "e4", "s": 5, "q": "Comment se sent la biche ?", "e": "content", "a": "Oui, la biche est contente !", "not": ["rit"]}, {"id": "e5", "s": 11, "q": "Comment se sentent les amis ?", "e": "fatigue", "a": "Oui, ils sont fatigués : ils font la sieste !", "not": ["content"]}], "trouve": [{"id": "t1", "l": 1, "s": 1, "t": "le bison", "z": [[0.32, 0.6, 0.22]]}, {"id": "t2", "l": 1, "s": 5, "t": "la biche", "z": [[0.78, 0.6, 0.18]]}, {"id": "t3", "l": 1, "s": 10, "t": "la belette", "z": [[0.52, 0.27, 0.17]]}, {"id": "t4", "l": 1, "s": 2, "t": "l'arbre", "z": [[0.7, 0.3, 0.25]]}, {"id": "t5", "l": 2, "s": 3, "t": "la noisette", "z": [[0.35, 0.81, 0.05]]}, {"id": "t6", "l": 2, "s": 4, "t": "la biche", "z": [[0.85, 0.57, 0.06]]}, {"id": "t7", "l": 2, "s": 8, "t": "la belette", "z": [[0.8, 0.2, 0.09]]}, {"id": "t8", "l": 2, "s": 7, "t": "une noisette", "z": [[0.42, 0.36, 0.05], [0.64, 0.4, 0.05]]}, {"id": "t9", "l": 2, "s": 11, "t": "la belette", "z": [[0.58, 0.85, 0.1]]}], "manque": [{"id": "m1", "s": 1, "a": "Le ", "b": " est fatigué.", "ok": "bison", "f": ["biche", "belette"]}, {"id": "m2", "s": 5, "a": "Voici la ", "b": " !", "ok": "biche", "f": ["belette", "bison"]}, {"id": "m3", "s": 8, "a": "C'est la ", "b": " ! Coquine !", "ok": "belette", "f": ["biche", "bison"]}, {"id": "m4", "s": 3, "a": "Boum ! Une ", "b": " !", "ok": "noisette", "f": ["pomme", "fleur"]}, {"id": "m5", "s": 2, "a": "Il se couche sous l'", "b": ".", "ok": "arbre", "f": ["herbe", "eau"]}, {"id": "m6", "s": 9, "a": "Tout le monde ", "b": ".", "ok": "rit", "f": ["pleure", "dort"]}], "key": {}, "colors": {}, "icons": {"noisette": "🌰", "pomme": "🍎", "fleur": "🌼", "arbre": "🌳", "herbe": "🌱", "eau": "💧", "rit": "😂", "pleure": "😢", "dort": "😴"}};</script>
+<script src="../jeux.js"></script>
+<script data-goatcounter="https://lisaveclila.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

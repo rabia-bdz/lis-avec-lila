@@ -60,6 +60,14 @@ footer{text-align:center;color:#A3AABA;font-size:15px;margin:26px 0 10px}
 .yb.st .ic{background:#A77BFF;box-shadow:0 8px 18px rgba(167,123,255,.3)}
 .yb.soon{opacity:.55;pointer-events:none}
 @media (max-width:960px){.yt{grid-template-columns:1fr}}
+.hs{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.hc{display:flex;align-items:center;gap:16px;background:#fff;border-radius:30px;padding:12px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink);transition:transform .15s}
+.hc:hover{transform:translateY(-3px)}
+.hc img{width:40%;aspect-ratio:1;object-fit:cover;border-radius:22px;flex:none}
+.hc small{display:inline-block;font-size:15px;font-weight:600;color:#fff;border-radius:999px;padding:4px 12px}
+.hc b{display:block;font-size:clamp(20px,2.4vw,26px);font-weight:700;line-height:1.1;margin-top:8px}
+.hc span{display:block;font-family:Andika;color:var(--muted);font-size:16px;margin-top:6px}
+@media (max-width:700px){.hs{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -86,6 +94,12 @@ footer{text-align:center;color:#A3AABA;font-size:15px;margin:26px 0 10px}
       <b>D<i>d</i></b><div class="pic"><img src="d/img/dinosaure_n.jpg" alt=""></div><span>On joue !</span></a>
     <a class="L" href="e/index.html" style="--c1:#F28BD9;--c2:#D94FBF;--c3:#A8318F">
       <b>E<i>e</i></b><div class="pic"><img src="e/img/escargot_n.jpg" alt=""></div><span>On joue !</span></a>
+  </div>
+
+  <h2>Jeux sur les histoires</h2>
+  <div class="hs">
+    <a class="hc" href="histoires/bison/index.html"><img src="histoires/bison/img/couv.jpg" alt=""><div><small style="background:#4F8DF7">Le son B</small><b>La sieste du bison</b><span>6 jeux : l'ordre, qui est-ce, vrai ou faux…</span></div></a>
+    <a class="hc" href="histoires/cameleon/index.html"><img src="histoires/cameleon/img/couv.jpg" alt=""><div><small style="background:#A77BFF">Le son C</small><b>Le caméléon et la coccinelle</b><span>6 jeux : l'ordre, qui est-ce, vrai ou faux…</span></div></a>
   </div>
 
   <h2>Les vidéos de Lila</h2>
