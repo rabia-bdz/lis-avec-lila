@@ -118,7 +118,9 @@ function emo(first){
 function trouve(first){
  if(first){cur.list=shuf(lvlItems(D.trouve)).slice(0,ROUNDS);cur.n=cur.list.length;say('Cherche bien dans l\'image et touche !',P('q_trouve'))}
  const it=cur.list[cur.i];
- frame(`<div class="sent">Trouve ${it.t} !</div><div class="find" id="find"><img src="${sc(it.s)}" alt=""></div>`);
+ frame(`<div class="sent">Trouve ${it.t} !</div><button class="say" id="say">🔊 Écouter</button><div class="find" id="find"><img src="${sc(it.s)}" alt=""></div>`);
+ const fk='f_'+it.t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z]/g,'_');
+ const rd=()=>play(S(fk));setTimeout(rd,cur.i===0?2600:0);$('#say').onclick=rd;
 
  let done=false;
  $('#find').onclick=e=>{
