@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les jeux de Lila – la lettre H</title>
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+@font-face{font-family:Fredoka;src:url(fonts/fredoka-latin-600-normal.woff2) format('woff2');font-weight:600}
+@font-face{font-family:Fredoka;src:url(fonts/fredoka-latin-700-normal.woff2) format('woff2');font-weight:700}
+@font-face{font-family:Andika;src:url(fonts/andika-latin-400-normal.woff2) format('woff2');font-weight:400}
+@font-face{font-family:Andika;src:url(fonts/andika-latin-700-normal.woff2) format('woff2');font-weight:700}
+:root{--ink:#1F2A44;--muted:#6B7385;--surface:#fff;--mint:#1DB584;--mint-d:#13976C;--sky:#4F8DF7;--orange:#FF7A2F;--sun:#FFC83D;--soft:#F1F4FA;--line:#E6EAF2;--shadow:0 10px 30px rgba(31,42,68,.08),0 2px 6px rgba(31,42,68,.05)}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{font-family:Fredoka,system-ui,sans-serif;color:var(--ink);background:#F7F8FC;padding:16px;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+body::before,body::after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(70px);opacity:.55}
+body::before{width:520px;height:520px;left:-160px;top:-140px;background:#BDF3DD}
+body::after{width:560px;height:560px;right:-180px;bottom:-200px;background:#CFE0FF}
+.blob{position:fixed;z-index:-1;width:380px;height:380px;right:18%;top:-120px;border-radius:50%;filter:blur(80px);opacity:.45;background:#FFE1C7}
+.wrap{max-width:1080px;margin:0 auto}
+button{font:inherit;cursor:pointer;border:none;color:inherit;background:none}
+svg.i{width:1.15em;height:1.15em;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
+svg.f{fill:currentColor;stroke:none}
+header{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.9);border-radius:28px;padding:10px 14px 10px 10px;box-shadow:var(--shadow);position:sticky;top:10px;z-index:5}
+.lila{width:72px;height:72px;border-radius:22px;flex:none;object-fit:cover;box-shadow:0 0 0 3px #fff,0 6px 16px rgba(29,181,132,.35)}
+.lila.talk{animation:talk .45s ease-in-out 4}.lila.happy{animation:jump .7s ease 2}.lila.sad{animation:wig .5s}
+@keyframes talk{50%{transform:scale(1.06) rotate(-3deg)}}
+@keyframes jump{30%{transform:translateY(-10px) scale(1.06)}60%{transform:none}}
+@keyframes wig{25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
+.bubble{flex:1;font-size:clamp(17px,2.4vw,24px);font-weight:600;line-height:1.25;position:relative;background:var(--soft);border-radius:18px;padding:12px 16px}
+.bubble::before{content:"";position:absolute;left:-7px;top:22px;width:14px;height:14px;background:var(--soft);transform:rotate(45deg);border-radius:3px}
+.right{display:flex;align-items:center;gap:10px}
+.stars{display:flex;align-items:center;gap:6px;font-size:20px;font-weight:700;background:#FFF6DB;color:#B07A00;border-radius:999px;padding:8px 14px}
+.stars svg{color:var(--sun)}
+.lvl{display:flex;background:var(--soft);border-radius:999px;padding:4px}
+.lvl button{padding:8px 14px;border-radius:999px;font-size:15px;font-weight:600;color:var(--muted);transition:.2s}
+.lvl button.on{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(31,42,68,.12)}
+.lvl button i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.home{display:none;margin:14px 0 0;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:10px 18px;font-size:17px;font-weight:600;box-shadow:var(--shadow)}
+main{margin-top:18px}
+.start{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;background:#fff;border-radius:36px;padding:28px;box-shadow:var(--shadow)}
+.start img{width:100%;border-radius:28px;aspect-ratio:1;object-fit:cover}
+.start h1{font-size:clamp(34px,5vw,58px);line-height:1.05;font-weight:700}
+.start h1 .a{color:var(--orange)}
+.start p{color:var(--muted);font-size:20px;margin:12px 0 26px;font-family:Andika}
+.cta{display:inline-flex;align-items:center;gap:12px;font-size:26px;font-weight:700;background:var(--mint);color:#fff;border-radius:999px;padding:16px 34px 16px 26px;box-shadow:0 10px 24px rgba(29,181,132,.35);transition:transform .15s}
+.cta:active,.btn:active,.mbtn:active,.yn button:active{transform:scale(.96)}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.mbtn{background:#fff;border-radius:30px;padding:12px;display:flex;align-items:center;gap:16px;text-align:left;box-shadow:var(--shadow);transition:transform .15s,box-shadow .2s}
+.mbtn:hover{box-shadow:0 16px 36px rgba(31,42,68,.12)}
+.mbtn .th{width:44%;aspect-ratio:4/3;border-radius:22px;overflow:hidden;flex:none;position:relative}
+.mbtn .th img{width:100%;height:100%;object-fit:cover}
+.mbtn .th .ic{position:absolute;left:10px;bottom:10px;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:#fff;font-size:22px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.mbtn b{display:block;font-size:clamp(20px,2.6vw,27px);font-weight:700;line-height:1.1}
+.mbtn span.s{display:block;font-size:16px;color:var(--muted);margin-top:6px;font-family:Andika}
+.panel{background:#fff;border-radius:34px;padding:20px;text-align:center;box-shadow:var(--shadow)}
+.media{width:min(760px,100%);aspect-ratio:16/9;border-radius:24px;background:var(--soft);display:block;margin:0 auto;object-fit:cover}
+.word{font-family:Andika;font-size:clamp(54px,10vw,96px);font-weight:700;line-height:1.1;color:var(--ink);margin-top:8px}
+.a{color:var(--orange)}
+.row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:14px 24px;font-size:21px;font-weight:600;transition:transform .15s}
+.b-primary{background:var(--mint);color:#fff;box-shadow:0 8px 20px rgba(29,181,132,.3)}
+.b-sky{background:#EAF1FF;color:var(--sky)}
+.b-sun{background:#FFF3D6;color:#B06F00}
+.b-ghost{background:var(--soft);color:var(--muted)}
+.step{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.step span{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--soft);color:#A3AABA;font-size:19px;font-weight:600;transition:.25s}
+.step span.on{background:var(--mint);color:#fff;transform:scale(1.06);box-shadow:0 6px 16px rgba(29,181,132,.35)}
+.choices{display:grid;gap:16px;margin-top:16px}
+.choice{background:#fff;border-radius:26px;padding:8px;box-shadow:0 0 0 2px var(--line);transition:.2s}
+.choice:hover{box-shadow:0 0 0 3px #C9D6F0}
+.choice img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:19px;display:block}
+.choice.good{box-shadow:0 0 0 5px var(--mint),0 10px 24px rgba(29,181,132,.3);animation:pop .5s}
+.choice.bad{animation:wig .45s;box-shadow:0 0 0 4px #FFB3A0}
+@keyframes pop{50%{transform:scale(1.04)}}
+.memo{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;perspective:1000px}
+.card{aspect-ratio:4/3;position:relative;transform-style:preserve-3d;transition:transform .45s;cursor:pointer}
+.card.up,.card.done{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.back{background:linear-gradient(140deg,#5ED3A8,#1DB584 55%,#139E74);box-shadow:0 6px 16px rgba(29,181,132,.28)}
+.back::after{content:"";position:absolute;inset:8px;border-radius:16px;border:2px dashed rgba(255,255,255,.45)}
+.back img{width:44%;border-radius:18px;box-shadow:0 0 0 3px rgba(255,255,255,.85)}
+.front{background:#fff;box-shadow:0 0 0 2px var(--line);transform:rotateY(180deg)}
+.front img{width:100%;height:100%;object-fit:cover}
+.front .w{font-family:Andika;font-size:clamp(20px,3.6vw,40px);font-weight:700}
+.card.done .front{box-shadow:0 0 0 4px var(--mint)}
+.box .item{width:min(600px,100%);margin:0 auto}
+.box .item img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:24px}
+.yn{display:flex;gap:14px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.yn button{display:inline-flex;align-items:center;gap:12px;font-size:24px;font-weight:700;border-radius:24px;padding:18px 28px;transition:transform .15s}
+.yn .y{background:var(--mint);color:#fff;box-shadow:0 8px 20px rgba(29,181,132,.3)}
+.yn .n{background:#FFEDE5;color:#E0581C}
+.prog{display:flex;gap:6px;justify-content:center;margin-top:18px}
+.prog i{width:28px;height:8px;border-radius:99px;background:var(--line);transition:.3s}
+.prog i.ok{background:var(--mint)}
+.party{position:fixed;inset:0;pointer-events:none;z-index:9}
+.party span{position:absolute;top:-30px;width:12px;height:18px;border-radius:3px;animation:fall 2.6s cubic-bezier(.3,.6,.6,1) forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.end{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;text-align:left}
+.end img{width:100%;border-radius:28px;aspect-ratio:1;object-fit:cover}
+.end h2{font-size:clamp(44px,7vw,72px);font-weight:700;color:var(--mint)}
+.end p{font-family:Andika;font-size:22px;color:var(--muted);margin-top:6px}
+.end .row{justify-content:flex-start}
+@media (max-width:700px){.menu{grid-template-columns:1fr}.lila{width:56px;height:56px;border-radius:18px}.memo{grid-template-columns:repeat(2,1fr)}.start,.end{grid-template-columns:1fr;text-align:center}.end .row{justify-content:center}header{flex-wrap:wrap}.right{width:100%;justify-content:space-between}}
+.slots{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.slot{min-width:110px;height:96px;padding:0 18px;border-radius:22px;border:3px dashed #CBD3E3;display:flex;align-items:center;justify-content:center;font-family:Andika;font-size:56px;font-weight:700;color:var(--ink);transition:.25s}
+.slot .ghost{color:#D5DBE7}
+.slot.fill{border:3px solid var(--mint);background:#EAFBF4;animation:pop .35s}
+.slots.done .slot{background:var(--mint);color:#fff;border-color:var(--mint)}
+.slots.done .slot .a{color:#fff}
+.tiles{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.tile{font-family:Andika;font-size:48px;font-weight:700;background:#FFF3D6;color:#7A4B00;border-radius:22px;padding:10px 26px;box-shadow:0 6px 0 #F2D08A;transition:transform .15s}
+.tile:active{transform:translateY(4px);box-shadow:0 2px 0 #F2D08A}
+.tile.used{opacity:.25;box-shadow:none;cursor:default}
+.tile.bad{animation:wig .45s;background:#FFE3DA}
+.menu .mbtn:last-child:nth-child(odd){grid-column:1/-1;max-width:calc(50% - 9px);margin:0 auto;width:100%}
+@media (max-width:700px){.slot{min-width:80px;height:76px;font-size:40px}.tile{font-size:38px}.menu .mbtn:last-child:nth-child(odd){max-width:none}}
+.back2{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;background:#fff;border-radius:999px;padding:10px 18px;font-size:17px;font-weight:600;box-shadow:var(--shadow);color:var(--ink);text-decoration:none}
+.vids{margin-top:26px}
+.vids h2{font-size:clamp(24px,3.2vw,32px);font-weight:700;margin:0 0 14px 6px}
+.vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.vcard{display:flex;align-items:center;gap:16px;background:#fff;border-radius:30px;padding:12px;box-shadow:var(--shadow);text-decoration:none;color:var(--ink);transition:transform .15s,box-shadow .2s}
+.vcard:hover{box-shadow:0 16px 36px rgba(31,42,68,.12)}
+.vcard .th{width:44%;aspect-ratio:16/9;border-radius:22px;overflow:hidden;flex:none;position:relative}
+.vcard .th img{width:100%;height:100%;object-fit:cover}
+.vcard .th .pl{position:absolute;inset:0;margin:auto;width:58px;height:58px;border-radius:50%;background:rgba(255,0,0,.88);color:#fff;display:grid;place-items:center;font-size:26px;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+.vcard b{display:block;font-size:clamp(19px,2.4vw,25px);font-weight:700;line-height:1.15}
+.vcard span.s{display:block;font-size:16px;color:var(--muted);margin-top:6px;font-family:Andika}
+.vcard.soon{opacity:.6;cursor:default}.vcard.soon .pl{background:#A3AABA}
+@media (max-width:700px){.vgrid{grid-template-columns:1fr}}
+.pond{position:relative;height:clamp(300px,52vh,460px);border-radius:26px;background:linear-gradient(180deg,#D6F4FF,#8CD8F2 55%,#57B6DE);overflow:hidden;margin-top:12px}
+.fish{position:absolute;left:0;top:0;width:92px;height:92px;border-radius:50%;font-family:Andika;font-weight:700;font-size:58px;line-height:1;display:grid;place-items:center;color:var(--ink);box-shadow:0 6px 0 rgba(31,42,68,.15),0 10px 20px rgba(31,42,68,.12);will-change:transform}
+.fish.caught{animation:catch .6s forwards;pointer-events:none}@keyframes catch{to{opacity:0;scale:1.6}}
+.fish.nope{animation:wig2 .45s}@keyframes wig2{25%{rotate:-14deg}75%{rotate:14deg}}
+.lotog .choice{position:relative}.tok{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:var(--mint);color:#fff;display:none;place-items:center;font-size:34px;box-shadow:0 6px 16px rgba(29,181,132,.4)}.won .tok{display:grid}.won img{opacity:.55}
+.gapc{display:inline-block;min-width:.7em;border-bottom:6px solid #CBD3E3;color:#CBD3E3;margin-right:2px}.gapc.ok{color:var(--orange);border-color:var(--mint)}
+@media (max-width:700px){.fish{width:72px;height:72px;font-size:46px}}
+.vcard.book .th .pl{background:rgba(255,153,0,.95)}
+
+/* nouvel accueil de la lettre (proposition 25/11) */
+.start2{display:grid;grid-template-columns:auto auto 1fr auto;gap:22px;align-items:center;background:#fff;border-radius:34px;padding:18px 22px;box-shadow:var(--shadow)}
+.tile2{width:126px;height:126px;border-radius:30px;background:linear-gradient(150deg,var(--c1),var(--c2));box-shadow:0 9px 0 var(--c3);display:grid;place-items:center;color:#fff}
+.tile2 b{font-family:Andika;font-size:76px;line-height:1;font-weight:700;text-shadow:0 4px 0 rgba(0,0,0,.12)}.tile2 b i{font-style:normal;font-size:.55em;opacity:.85;margin-left:2px}
+.lila2{width:118px;height:118px;border-radius:50%;object-fit:cover;object-position:50% 30%;box-shadow:0 0 0 5px #fff,0 0 0 8px #BDF3DD;animation:bob 3.5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-2deg)}}
+.txt2 h1{font-size:clamp(30px,4vw,48px);line-height:1.05;font-weight:700}.txt2 h1 span{color:var(--c2)}
+.txt2 p{font-family:Andika;color:var(--muted);font-size:19px;margin-top:6px}
+.cta2{font-size:28px;padding:20px 36px 20px 28px}
+.vids h2{display:flex;align-items:center;gap:12px}
+.hic{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;font-size:20px;flex:none}
+.back2{gap:12px;padding:8px 18px 8px 8px;margin:12px 0 14px}
+.hico{width:44px;height:44px;border-radius:50%;background:var(--mint);color:#fff;display:grid;place-items:center;font-size:22px}
+.az{display:flex;align-items:center;gap:6px}.az i{font-style:normal;font-family:Andika;font-weight:700;color:#fff;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:26px;box-shadow:0 3px 0 rgba(0,0,0,.15)}.az em{font-style:normal;color:var(--muted);font-size:22px}
+.home{gap:12px;padding:8px 20px 8px 8px}
+.mini4{display:grid;grid-template-columns:1fr 1fr;gap:4px;width:44px;height:44px;padding:5px;border-radius:14px;background:var(--soft)}.mini4 i{border-radius:5px}
+.home .lbl{font-size:20px}
+@media (max-width:820px){.start2{grid-template-columns:auto 1fr;text-align:left}.lila2{display:none}.cta2{grid-column:1/-1;justify-content:center}}
+@media (max-width:460px){.tile2{width:96px;height:96px}.tile2 b{font-size:58px}}
+.front .w{padding:6px;text-align:center;line-height:1.05}
+</style>
+</head>
+<body>
+<div class="blob"></div>
+<div class="wrap">
+  <header>
+    <img class="lila" id="lila" src="img/lila_face.jpg" alt="Lila">
+    <div class="bubble" id="bubble">Bonjour ! On joue avec la lettre H ?</div>
+    <div class="right">
+      <div class="stars"><span id="staricon"></span><span id="score">0</span></div>
+      <div class="lvl"><button id="l1" class="on"><i style="background:#1DB584"></i>Facile</button><button id="l2"><i style="background:#FF7A2F"></i>Défi</button></div>
+    </div>
+  </header>
+  <a class="back2" href="../index.html" id="back2"></a>
+  <button class="home" id="home"></button>
+  <main id="main"></main>
+</div>
+<div class="party" id="party"></div>
+<script>
+const I={
+play:'<svg class="i f" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
+replay:'<svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>',
+sound:'<svg class="i" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
+check:'<svg class="i" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+next:'<svg class="i" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>',
+home:'<svg class="i" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/></svg>',
+star:'<svg class="i f" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></svg>',
+eye:'<svg class="i" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+mic:'<svg class="i" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg>',
+timer:'<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M10 2h4"/></svg>',
+hand:'<svg class="i" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v6"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>',
+target:'<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>',
+cards:'<svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="11" height="15" rx="2.5"/><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v12"/></svg>',
+box:'<svg class="i" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>',
+puzzle:'<svg class="i" viewBox="0 0 24 24"><path d="M10 3h4v2.5a1.5 1.5 0 0 0 3 0V3h4v6h-2.5a1.5 1.5 0 0 0 0 3H21v9h-6v-2.5a1.5 1.5 0 0 0-3 0V21H3v-6h2.5a1.5 1.5 0 0 0 0-3H3V3h7z"/></svg>',
+no:'<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>',
+};
+
+const CFG={"letter": "H", "first": "h", "words": ["hibou", "heron", "hippopotame", "herisson", "hamster"], "label": {"hibou": "hibou", "heron": "héron", "hippopotame": "hippopotame", "herisson": "hérisson", "hamster": "hamster", "avion": "avion", "ami": "ami", "abeille": "abeille", "ane": "âne", "alouette": "alouette", "agneau": "agneau", "alligator": "alligator", "bebe": "bébé", "baleine": "baleine", "bison": "bison", "biche": "biche", "belette": "belette", "bouc": "bouc", "babouin": "babouin", "bateau": "bateau", "canard": "canard", "castor": "castor", "coq": "coq", "coccinelle": "coccinelle", "cameleon": "caméléon", "crabe": "crabe", "dauphin": "dauphin", "dinde": "dinde", "dromadaire": "dromadaire", "dalmatien": "dalmatien", "dragon": "dragon de Komodo", "dinosaure": "dinosaure", "ecureuil": "écureuil", "elan": "élan", "elephant": "éléphant", "escargot": "escargot", "faucon": "faucon", "flamant": "flamant rose", "fennec": "fennec", "fourmi": "fourmi", "fusee": "fusée"}, "syl": {"hibou": ["hi", "bou"], "heron": ["hé", "ron"], "hippopotame": ["hip", "po", "po", "tame"], "herisson": ["hé", "ris", "son"], "hamster": ["ham", "ster"]}, "menu": ["hibou", "heron", "hippopotame", "herisson", "hamster"], "videos": [{"title": "La leçon de la lettre H", "img": "hibou", "url": "https://youtu.be/4gDioN_P2hE"}, {"title": "L'histoire de la lettre H", "img": "herisson", "url": ""}], "other": ["avion", "ami", "abeille", "ane", "alouette", "agneau", "alligator", "bebe", "baleine", "bison", "biche", "belette", "bouc", "babouin", "bateau", "canard", "castor", "coq", "coccinelle", "cameleon", "crabe", "dauphin", "dinde", "dromadaire", "dalmatien", "dragon", "dinosaure", "ecureuil", "elan", "elephant", "escargot", "faucon", "flamant", "fennec", "fourmi", "fusee"], "games": ["rep", "find", "memo", "manque"], "books": [{"title": "Le livre de la lettre H", "img": "hamster", "url": ""}], "col": ["#7FE3D6", "#14B8A6", "#0E8C80"]};
+const AW=CFG.words, OTHER=CFG.other, LABEL=CFG.label, L=CFG.letter;
+const $=id=>document.getElementById(id);
+setTimeout(()=>{$('staricon').innerHTML=I.star;$('home').innerHTML='<span class="mini4"><i style="background:#1DB584"></i><i style="background:#4F8DF7"></i><i style="background:#E84D8A"></i><i style="background:#FFB020"></i></span><span class="lbl">Jeux</span>';$('home').setAttribute('aria-label','Retour aux jeux');$('back2').innerHTML='<span class="hico">'+I.home+'</span><span class="az"><i style="background:#FF7A2F">A</i><em>→</em><i style="background:#1DB584">Z</i></span>';$('back2').setAttribute('aria-label','Toutes les lettres');},0);
+let level=1,score=0,gen=0;
+
+// ---------- son ----------
+const player=new Audio();
+let stopFlag=0;
+function play(src){return new Promise(res=>{try{player.pause();player.src=src;player.onended=()=>res();player.onerror=()=>res();const p=player.play();if(p&&p.catch)p.catch(()=>res());}catch(e){res();}});}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function seq(items){const g=gen;for(const it of items){if(g!==gen)return false;if(typeof it==='number')await wait(it);else if(typeof it==='function')it();else await play(it);}return g===gen;}
+const W=w=>`snd/${w}.mp3`, P=p=>`snd/p_${p}.mp3`, C=w=>`snd/c_${w}.mp3`;
+let actx=null;
+function ding(ok=true){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const n=ok?[660,880,1100]:[330,262];n.forEach((f,i)=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;g.gain.setValueAtTime(.0001,actx.currentTime+i*.12);g.gain.exponentialRampToValueAtTime(.15,actx.currentTime+i*.12+.02);g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+i*.12+.3);o.connect(g).connect(actx.destination);o.start(actx.currentTime+i*.12);o.stop(actx.currentTime+i*.12+.35);});}catch(e){}}
+
+// ---------- Lila ----------
+function lila(msg,mood='talk'){ $('bubble').textContent=msg; const l=$('lila'); l.className='lila'; void l.offsetWidth; l.classList.add(mood); }
+function star(n=1){score+=n;$('score').textContent=score;}
+function confetti(){const e=['#1DB584','#FF7A2F','#4F8DF7','#FFC83D','#B98BFF'],p=$('party');for(let i=0;i<40;i++){const s=document.createElement('span');s.style.background=e[i%e.length];s.style.left=Math.random()*100+'vw';s.style.animationDelay=Math.random()*.6+'s';p.appendChild(s);setTimeout(()=>s.remove(),3300);}}
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const firstHTML=t=>{const m=t.match(new RegExp('^('+CFG.first+')(.*)$','i'));return m?`<span class="a">${m[1]}</span>${m[2]}`:t;};
+const wordHTML=w=>firstHTML(LABEL[w]);
+const prog=(n,i)=>'<div class="prog">'+Array.from({length:n},(_,k)=>`<i class="${k<i?'ok':''}"></i>`).join('')+'</div>';
+function reset(){gen++;try{player.pause();}catch(e){} document.querySelectorAll('video').forEach(v=>{try{v.pause();}catch(e){}});}
+
+// ---------- accueil / menu ----------
+function start(){const [c1,c2,c3]=CFG.col||['#4FD6A5','#1DB584','#11916A'];
+  $('main').innerHTML=`<div class="start2" style="--c1:${c1};--c2:${c2};--c3:${c3}">
+    <div class="tile2"><b>${L}<i>${L.toLowerCase()}</i></b></div>
+    <img class="lila2" src="img/lila.jpg" alt="Lila">
+    <div class="txt2"><h1>La lettre <span>${L}</span></h1><p>On écoute, on regarde, on joue !</p></div>
+    </div>`+games()+vids()+books();
+  $('go').onclick=()=>menu(); }
+function books(){if(!(CFG.books||[]).length)return '';return `<div class="vids"><h2><span class="hic" style="background:#FF9900">${I.book}</span>Le livre</h2><div class="vgrid">${CFG.books.map(v=>{const on=!!v.url;return `<${on?'a':'div'} class="vcard book${on?'':' soon'}"${on?` href="${v.url}" target="_blank" rel="noopener"`:''}><div class="th"><img src="img/${v.img}_n.jpg" alt=""><span class="pl">${I.book}</span></div><div><b>${v.title}</b><span class="s">${on?'Le livre sur Amazon':'Bientôt'}</span></div></${on?'a':'div'}>`;}).join('')}</div></div>`;}
+function games(){return `<div class="vids"><h2><span class="hic" style="background:#1DB584">🎲</span>Les jeux</h2><div class="vgrid"><button class="vcard" id="go" style="text-align:left;font:inherit"><div class="th"><img src="img/${CFG.videos[0].img}_n.jpg" alt=""><span class="pl" style="background:rgba(29,181,132,.95)">${I.play}</span></div><div><b>Les jeux de la lettre ${L}</b><span class="s">On joue avec la lettre ${L} !</span></div></button><div class="vcard soon"><div class="th"><img src="img/${CFG.videos[CFG.videos.length-1].img}_n.jpg" alt=""><span class="pl">📖</span></div><div><b>Jeux sur l'histoire</b><span class="s">Bientôt</span></div></div></div></div>`;}
+function vids(){return `<div class="vids"><h2><span class="hic" style="background:#FF0033">${I.play}</span>Les vidéos</h2><div class="vgrid">${CFG.videos.map(v=>{const on=!!v.url;return `<${on?'a':'div'} class="vcard${on?'':' soon'}"${on?` href="${v.url}" target="_blank" rel="noopener"`:''}><div class="th"><img src="img/${v.img}_n.jpg" alt=""><span class="pl">${I.play}</span></div><div><b>${v.title}</b><span class="s">${on?'Regarder sur YouTube':'Bientôt'}</span></div></${on?'a':'div'}>`;}).join('')}</div></div>`;}
+function menu(){reset();$('home').style.display='none';$('back2').style.display='inline-flex';
+  $('main').innerHTML=`<div class="menu">${CFG.games.map((g,k)=>{const [c,ic,t,s]=GAMES[g];return `<button class="mbtn" data-g="${g}"><div class="th"><img src="img/${CFG.menu[k%CFG.menu.length]}_n.jpg" alt=""><span class="ic" style="background:${c}">${I[ic]}</span></div><div><b>${t}</b><span class="s">${s}</span></div></button>`;}).join('')}</div>`;
+  document.querySelectorAll('.mbtn').forEach(b=>b.onclick=()=>{$('home').style.display='inline-flex';$('back2').style.display='none';({rep,find,memo,box,join,loto,peche,manque})[b.dataset.g]();});
+  lila('Choisis un jeu !');seq([P('choisis')]);
+}
+$('home').onclick=menu;
+function setLevel(n){level=n;$('l1').classList.toggle('on',n===1);$('l2').classList.toggle('on',n===2);if($('go'))return;menu();}
+$('l1').onclick=()=>setLevel(1);$('l2').onclick=()=>setLevel(2);
+
+function finish(again){reset();ding();confetti();star(3);
+  $('main').innerHTML=`<div class="panel end"><img src="img/lila_bravo.jpg" alt=""><div><h2>Bravo !</h2><p>Tu as tout trouvé. C'est super !</p>
+   <div class="row"><button class="btn b-primary" id="again">${I.replay} Rejouer</button><button class="btn b-sky" id="back">${I.home} Autre jeu</button></div></div></div>`;
+  $('again').onclick=again;$('back').onclick=menu;
+  lila('Bravo ! Tu as tout trouvé ! C\'est super !','happy');seq([P('fini')]);
+}
+
+// ---------- 1. Écoute et répète ----------
+function rep(){reset();const list=shuffle(AW);let i=0;
+  function show(){reset();if(i>=list.length)return finish(rep);
+    const w=list[i];const hide=level===2;let shown=!hide;
+    $('main').innerHTML=`<div class="panel">
+      <video class="media" id="vid" src="vid/${w}.mp4" poster="img/${hide?w+'_n':w}.jpg" playsinline muted preload="auto" style="${hide?'filter:blur(18px)':''}"></video>
+      <div class="word">${wordHTML(w)}</div>
+      <div class="row">
+        <button class="btn b-sky" id="again">${hide?I.eye+' Voir et écouter':I.replay+' Revoir'}</button>
+        <button class="btn b-primary" id="said">${I.check} Je l'ai dit !</button>
+        <button class="btn b-ghost" id="next" aria-label="Suivant">${I.next}</button>
+      </div>${prog(list.length,i)}</div>`;
+    const watch=async()=>{reset();const v=$('vid');v.style.filter='none';
+      if(!shown){shown=true;$('again').innerHTML=I.replay+' Revoir';}
+      lila('Regarde ! Qui est-ce ?','talk');v.muted=true;v.currentTime=0;const p=v.play();if(p&&p.catch)p.catch(()=>{});play(C(w));};
+    if(hide){lila('Lis le mot avec ton doigt… puis regarde !','talk');}
+    else watch();
+    $('again').onclick=watch;
+    $('said').onclick=()=>{reset();star();ding();lila('Bravo !','happy');seq([P('bravo'),400,()=>{i++;show();}]);};
+    $('next').onclick=()=>{i++;show();};
+  }
+  show();
+}
+
+// ---------- 2. Trouve l'image ----------
+function find(){reset();const list=shuffle(AW);let i=0;const n=level===1?2:3;
+  function show(){reset();if(i>=list.length)return finish(find);
+    const w=list[i];const opts=shuffle([w,...shuffle(AW.filter(x=>x!==w)).slice(0,n-1)]);
+    $('main').innerHTML=`<div class="panel">
+      ${level===2?`<div class="word">${wordHTML(w)}</div>`:''}
+      <div class="row" style="margin-top:4px"><button class="btn b-sky" id="again">${I.sound} ${level===2?'Aide : écouter':'Réécouter'}</button><button class="btn b-ghost" id="next" aria-label="Suivant">${I.next}</button></div>
+      <div class="choices" style="grid-template-columns:repeat(${n},1fr)">${opts.map((o,k)=>`<button class="choice" data-k="${k}"><img src="img/${o}_n.jpg" alt=""></button>`).join('')}</div>
+      ${prog(list.length,i)}</div>`;
+    if(level===1){lila('Montre-moi : '+LABEL[w]+' !');seq([P('montre'),W(w)]);}
+    else{lila('Lis le mot, et trouve la bonne image.');seq([P('lis')]);}
+    $('again').onclick=()=>seq(level===1?[P('montre'),W(w)]:[W(w)]);
+    $('next').onclick=()=>{i++;show();};
+    let lock=false;
+    document.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{if(lock)return;const o=opts[+b.dataset.k];
+      if(o===w){lock=true;b.classList.add('good');ding();star();lila('Bravo ! '+LABEL[w]+' !','happy');reset();const nx=$('next');nx.className='btn b-primary';nx.innerHTML=I.next+' Suivant';seq([W(w),300,P('bravo')]);}
+      else{b.classList.remove('bad');void b.offsetWidth;b.classList.add('bad');ding(false);lila('Presque ! Essaie encore.','sad');reset();seq([P('presque')]);}});
+  }
+  show();
+}
+
+// ---------- 3. Les paires (16 cartes) ----------
+function memo(){reset();
+  const pick=shuffle(AW).slice(0,4);
+  const cards=shuffle(pick.flatMap(w=>[{w,kind:'img'},{w,kind:level===1?'img':'word'}]));
+  $('main').innerHTML=`<div class="panel"><div class="memo">${cards.map((c,i)=>`
+    <div class="card" data-i="${i}"><div class="face back"><img src="img/lila_face.jpg" alt=""></div><div class="face front">${c.kind==='img'?`<img src="img/${level===1?c.w:c.w+'_n'}.jpg" alt="">`:`<div class="w">${wordHTML(c.w)}</div>`}</div></div>`).join('')}</div>
+    <div class="prog" id="mp">${pick.map(()=>'<i></i>').join('')}</div></div>`;
+  lila(level===1?'Retourne deux cartes, et trouve les paires !':'Trouve l\'image et son mot !');seq([P('paires')]);
+  let open=[],lock=false,found=0;
+  document.querySelectorAll('.card').forEach(el=>el.onclick=()=>{
+    if(lock||el.classList.contains('up')||el.classList.contains('done'))return;
+    const c=cards[+el.dataset.i];el.classList.add('up');reset();seq([W(c.w)]);open.push([el,c]);
+    if(open.length===2){lock=true;const [[e1,c1],[e2,c2]]=open;
+      if(c1.w===c2.w){setTimeout(()=>{e1.classList.add('done');e2.classList.add('done');ding();star();found++;
+          document.querySelectorAll('#mp i')[found-1].classList.add('ok');lila('Bravo ! '+LABEL[c1.w]+' !','happy');open=[];lock=false;
+          if(found===pick.length)setTimeout(()=>finish(memo),1500);else seq([P('bravo')]);},800);}
+      else{setTimeout(()=>{e1.classList.remove('up');e2.classList.remove('up');lila('Pas pareil… Essaie encore !','sad');seq([P('paspareil')]);open=[];lock=false;},1600);}
+    }});
+}
+
+// ---------- 4. La boîte à (lettre) ----------
+function box(){const S=CFG.sound||L;reset();const list=shuffle([...shuffle(AW).slice(0,4),...shuffle(OTHER).slice(0,4)]);let i=0;
+  function show(){reset();if(i>=list.length)return finish(box);
+    const w=list[i];const isA=AW.includes(w);
+    $('main').innerHTML=`<div class="panel"><div class="box">
+      <div class="item"><img src="img/${w}_n.jpg" alt="">${level===2?`<div class="word" style="font-size:clamp(44px,8vw,72px)">${LABEL[w]}</div>`:''}</div></div>
+      <div class="row"><button class="btn b-sky" id="again">${I.sound} Écouter</button></div>
+      <div class="yn"><button class="y" id="yes">${I.box} Oui, ${S} !</button><button class="n" id="no">${I.no} Pas de ${S}</button></div>
+      ${prog(list.length,i)}</div>`;
+    lila('Est-ce que ça commence par '+S+' ?');
+    seq(level===1?[W(w),300,P('commence')]:[P('commence')]);
+    $('again').onclick=()=>seq([W(w)]);
+    let lock=false;
+    const answer=yes=>{if(lock)return;reset();
+      if(yes===isA){lock=true;ding();star();lila(isA?'Oui ! Ça commence par '+S+'. Dans la boîte !':'Bien vu ! Ça ne commence pas par '+S+'.','happy');seq([P(isA?'oui':'bienvu'),300,()=>{i++;show();}]);}
+      else{ding(false);lila('Écoute bien. Est-ce que tu entends '+S+' au début ?','sad');seq([P('ecoute'),300,W(w)]);}};
+    $('yes').onclick=()=>answer(true);$('no').onclick=()=>answer(false);
+  }
+  show();
+}
+
+// ---------- 5. Le mot en morceaux ----------
+const SYL=CFG.syl;
+function join(){reset();const list=shuffle(AW.filter(w=>SYL[w]&&SYL[w].length>1));let i=0;
+  function show(){reset();if(i>=list.length)return finish(join);
+    const w=list[i];const syl=SYL[w];
+    let tiles=syl.map((t,k)=>({t,k}));
+    if(level===2){const others=shuffle(AW.filter(x=>x!==w)).flatMap(x=>SYL[x].slice(1)).filter(t=>!syl.includes(t));tiles.push({t:others[0],k:-1});}
+    do{tiles=shuffle(tiles);}while(tiles.length>1&&tiles.every((x,n)=>x.k===n));
+    $('main').innerHTML=`<div class="panel">
+      <img class="media" src="img/${w}_n.jpg" alt="" style="max-width:520px">
+      <div class="slots">${syl.map((t,k)=>`<div class="slot" id="sl${k}">${level===1?`<span class="ghost">${t}</span>`:''}</div>`).join('')}</div>
+      <div class="tiles">${tiles.map((x,n)=>`<button class="tile" data-n="${n}">${x.t}</button>`).join('')}</div>
+      <div class="row"><button class="btn b-sky" id="again">${I.sound} Écouter</button><button class="btn b-ghost" id="next" aria-label="Suivant">${I.next}</button></div>
+      ${prog(list.length,i)}</div>`;
+    lila(level===1?'Remets les morceaux dans l\'ordre !':'Construis le mot. Attention, un morceau est en trop !');
+    seq([W(w)]);
+    $('again').onclick=()=>seq([W(w)]);
+    $('next').onclick=()=>{i++;show();};
+    let pos=0;
+    document.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{if(pos>=syl.length||b.disabled)return;const x=tiles[+b.dataset.n];
+      if(x.t===syl[pos]){b.disabled=true;b.classList.add('used');const sl=$('sl'+pos);sl.innerHTML=(pos===0?firstHTML(x.t):x.t);sl.classList.add('fill');pos++;ding();
+        if(pos===syl.length){star();lila('Bravo ! '+LABEL[w]+' !','happy');reset();document.querySelector('.slots').classList.add('done');
+          const nx=$('next');nx.className='btn b-primary';nx.innerHTML=I.next+' Suivant';seq([W(w),300,P('bravo')]);}}
+      else{b.classList.remove('bad');void b.offsetWidth;b.classList.add('bad');ding(false);lila('Presque ! Quel morceau vient '+(pos===0?'en premier':'après')+' ?','sad');}});
+  }
+  show();
+}
+
+// ---------- jeux ajoutés le 24/11 ----------
+const LETTERS=['A','B','C','D','E','F','G','H'];
+Object.assign(I,{
+book:'<svg class="i" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg>',
+grid:'<svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
+fish:'<svg class="i" viewBox="0 0 24 24"><path d="M2 12s4-6 11-6c4 0 7 3 9 6-2 3-5 6-9 6-7 0-11-6-11-6z"/><path d="M2 12 0 8m2 4-2 4"/><circle cx="16" cy="11" r="1"/></svg>',
+gap:'<svg class="i" viewBox="0 0 24 24"><path d="M4 20h5"/><path d="M12 6h8M12 12h8M12 18h8"/><path d="M6.5 4v10"/></svg>',
+pen:'<svg class="i" viewBox="0 0 24 24"><path d="M15 4.5l4.5 4.5L9 19.5H4.5V15z"/><path d="M13 6.5l4.5 4.5"/></svg>'});
+const GAMES={
+ rep:['#1DB584','sound','Écoute et répète','Les amis de Lila se présentent'],
+ find:['#4F8DF7','target',"Trouve l'image",'Touche la bonne image'],
+ memo:['#B98BFF','cards','Les paires','8 cartes cachées'],
+ box:['#FF7A2F','box','La boîte à '+(CFG.sound||L),'Ça commence par '+(CFG.sound||L)+' ?'],
+ join:['#FFB020','puzzle','Le mot en morceaux',"Remets les syllabes dans l'ordre"],
+ loto:['#E84D8A','grid','Le loto de Lila','Remplis ta carte'],
+ peche:['#2FA8D8','fish','La pêche aux lettres','Attrape tous les '+L],
+ manque:['#7A5CFA','gap','La lettre qui manque','Quelle lettre au début ?'],};
+
+// ---------- Le loto de Lila ----------
+function loto(){reset();const n=Math.min(level===1?4:6,AW.length);const card=shuffle(AW).slice(0,n);const calls=shuffle(card);let i=0;
+  $('main').innerHTML=`<div class="panel">
+    <div id="call"></div>
+    <div class="row" style="margin-top:4px"><button class="btn b-sky" id="again">${I.sound} ${level===2?'Aide : écouter':'Réécouter'}</button></div>
+    <div class="choices lotog" style="grid-template-columns:repeat(${n===4?2:3},1fr)">${card.map(o=>`<button class="choice" data-w="${o}"><img src="img/${o}_n.jpg" alt=""><span class="tok">${I.star}</span></button>`).join('')}</div>
+    <div class="prog" id="lp">${card.map(()=>'<i></i>').join('')}</div></div>`;
+  let lock=false;
+  function call(){reset();if(i>=calls.length)return setTimeout(()=>finish(loto),900);lock=false;const w=calls[i];
+    $('call').innerHTML=level===2?`<div class="word">${wordHTML(w)}</div>`:'';
+    if(level===1){lila('Montre-moi : '+LABEL[w]+' !');seq([P('montre'),W(w)]);}else{lila('Lis le mot, et trouve-le sur ta carte.');seq([P('lis')]);}}
+  $('again').onclick=()=>{const w=calls[i];if(w)seq(level===1?[P('montre'),W(w)]:[W(w)]);};
+  document.querySelectorAll('.lotog .choice').forEach(b=>b.onclick=()=>{if(lock||b.classList.contains('won')||i>=calls.length)return;const w=calls[i];
+    if(b.dataset.w===w){lock=true;b.classList.add('good','won');ding();star();document.querySelectorAll('#lp i')[i].classList.add('ok');lila('Bravo ! '+LABEL[w]+' !','happy');reset();i++;seq([W(w),300,P('bravo'),300,call]);}
+    else{b.classList.remove('bad');void b.offsetWidth;b.classList.add('bad');ding(false);lila('Presque ! Essaie encore.','sad');reset();seq([P('presque')]);}});
+  call();
+}
+
+// ---------- La pêche aux lettres (majuscules) ----------
+function peche(){reset();const g0=gen;const goal=6;let got=0;
+  const others=LETTERS.filter(x=>x!==L);const kinds=level===1?shuffle(others).slice(0,2):others;const speed=level===1?55:85;
+  $('main').innerHTML=`<div class="panel"><div class="word" style="font-size:clamp(34px,6vw,56px)">Attrape les <span class="a">${L}</span> !</div>
+    <div class="pond" id="pond"></div><div class="prog" id="pp">${Array.from({length:goal},()=>'<i></i>').join('')}</div></div>`;
+  lila('Attrape tous les '+L+' ! Touche seulement les '+L+'.');
+  const pond=$('pond'),cols=['#FFFFFF','#FFF3D6','#EAFBF4','#EAF1FF','#F6EDFF','#FFEDE5'];let fish=[],last=0,spawnT=0,sinceGood=0;
+  function spawn(){const W=pond.clientWidth,H=pond.clientHeight;const good=sinceGood>=2||Math.random()<.45;const ch=good?L:kinds[Math.floor(Math.random()*kinds.length)];sinceGood=good?0:sinceGood+1;
+    const el=document.createElement('button');el.className='fish';el.textContent=ch;el.style.background=cols[Math.floor(Math.random()*cols.length)];
+    const dir=Math.random()<.5?1:-1;const f={el,ch,dir,x:dir>0?-100:W+10,y:20+Math.random()*(H-130),ph:Math.random()*6,v:speed*(0.8+Math.random()*.5)};
+    el.onclick=()=>{if(el.classList.contains('caught'))return;
+      if(ch===L){el.classList.add('caught');ding();star();got++;document.querySelectorAll('#pp i')[got-1].classList.add('ok');lila('Bravo ! C\'est un '+L+' !','happy');
+        play(`snd/l_${L.toLowerCase()}.mp3`);if(got>=goal){setTimeout(()=>{if(g0===gen)finish(peche);},1000);}}
+      else{el.classList.remove('nope');void el.offsetWidth;el.classList.add('nope');ding(false);lila('Ça, c\'est un '+ch+'. Cherche le '+L+' !','sad');}};
+    pond.appendChild(el);fish.push(f);}
+  function tick(t){if(g0!==gen||!document.body.contains(pond))return;const dt=last?Math.min(.05,(t-last)/1000):0;last=t;spawnT-=dt;
+    if(spawnT<=0&&got<goal){spawn();spawnT=level===1?1.5:1.1;}
+    const W=pond.clientWidth;fish=fish.filter(f=>{f.x+=f.dir*f.v*dt;f.ph+=dt*2;const y=f.y+Math.sin(f.ph)*12;f.el.style.transform=`translate(${f.x}px,${y}px)`;
+      if(f.x<-120||f.x>W+20||f.el.classList.contains('gone')){f.el.remove();return false;}return true;});
+    requestAnimationFrame(tick);}
+  requestAnimationFrame(tick);
+}
+
+// ---------- La lettre qui manque ----------
+function manque(){reset();const list=shuffle(AW.filter(w=>LABEL[w][0].toLowerCase()===L.toLowerCase()));let i=0;
+  function show(){reset();if(i>=list.length)return finish(manque);
+    const w=list[i];const lab=LABEL[w];const n=level===1?2:3;const opts=shuffle([L.toLowerCase(),...shuffle(LETTERS.filter(x=>x!==L)).slice(0,n-1).map(x=>x.toLowerCase())]);
+    $('main').innerHTML=`<div class="panel">
+      <img class="media" src="img/${w}_n.jpg" alt="" style="max-width:520px">
+      <div class="word"><span class="gapc" id="gapc">?</span>${lab.slice(1)}</div>
+      <div class="tiles">${opts.map(o=>`<button class="tile" data-o="${o}">${o}</button>`).join('')}</div>
+      <div class="row"><button class="btn b-sky" id="again">${I.sound} ${level===2?'Aide : écouter':'Écouter'}</button><button class="btn b-ghost" id="next" aria-label="Suivant">${I.next}</button></div>
+      ${prog(list.length,i)}</div>`;
+    lila('Quelle lettre manque au début du mot ?');
+    if(level===1)seq([W(w)]);
+    $('again').onclick=()=>seq([W(w)]);
+    $('next').onclick=()=>{i++;show();};
+    let lock=false;
+    document.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{if(lock)return;
+      if(b.dataset.o===L.toLowerCase()){lock=true;b.classList.add('used');const g=$('gapc');g.textContent=lab[0];g.classList.add('ok');ding();star();lila('Bravo ! '+lab+' commence par '+L+' !','happy');reset();
+        const nx=$('next');nx.className='btn b-primary';nx.innerHTML=I.next+' Suivant';seq([W(w),300,P('bravo')]);}
+      else{b.classList.remove('bad');void b.offsetWidth;b.classList.add('bad');ding(false);lila('Presque ! Écoute bien le début du mot.','sad');reset();seq([P('presque'),300,W(w)]);}});
+  }
+  show();
+}
+
+
+start();
+</script>
+<script data-goatcounter="https://lisaveclila.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
